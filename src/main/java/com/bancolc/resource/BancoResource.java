@@ -1,10 +1,14 @@
 package com.bancolc.resource;
 
+import com.bancolc.event.RecursoCreadoEvent;
+import com.bancolc.models.Bank;
+import com.bancolc.repository.BankRepository;
+import com.bancolc.repository.filter.BankFilter;
+import com.bancolc.service.BankService;
+import java.util.List;
 import java.util.Optional;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.MessageSource;
@@ -18,12 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.bancolc.event.RecursoCreadoEvent;
-import com.bancolc.models.Bank;
-import com.bancolc.repository.BankRepository;
-import com.bancolc.repository.filter.BankFilter;
-import com.bancolc.service.BankService;
 
 @RestController
 @RequestMapping("/banco")
@@ -41,14 +39,20 @@ public class BancoResource {
   @Autowired
   private MessageSource messageSource;
 
-  @GetMapping
+
   public Page<Bank> buscar(BankFilter bankFilter, Pageable pageable){
     return bankRepository.filtrar(bankFilter, pageable);
+
+  }
+
+  @GetMapping
+  public List<Bank> encontrar(){
+      return bankRepository.findAll();
   }
 
   @GetMapping("/{codigo}")
-  public ResponseEntity<Bank>  buscarPorCodigo(@PathVariable Long codigo) {
-    Optional<Bank> bancoBase = bankRepository.findById(codigo);
+  public ResponseEntity<Bank>  buscarPorCodigo(@PathVariable Long bankAccountId) {
+    Optional<Bank> bancoBase = bankRepository.findById(bankAccountId);
 
     return bancoBase.isPresent() ? ResponseEntity.ok(bancoBase.get()) : ResponseEntity.notFound().build();
   }

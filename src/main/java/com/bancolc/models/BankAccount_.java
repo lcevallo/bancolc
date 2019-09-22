@@ -1,6 +1,5 @@
 package com.bancolc.models;
 
-import java.util.UUID;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -10,10 +9,10 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class BankAccount_ {
 
 	public static volatile SingularAttribute<BankAccount, String> accountHolder;
-	public static volatile SingularAttribute<BankAccount, UUID> bankId;
+	public static volatile SingularAttribute<BankAccount, Long> bankId;
 	public static volatile SingularAttribute<BankAccount, Long> bankAccountId;
 	public static volatile SingularAttribute<BankAccount, String> accountNumber;
-	public static volatile SingularAttribute<BankAccount, String> IFSC;
+	public static volatile SingularAttribute<BankAccount, String> ifsc;
 
 }
 

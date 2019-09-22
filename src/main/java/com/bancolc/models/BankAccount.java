@@ -1,6 +1,6 @@
 package com.bancolc.models;
 
-import java.util.UUID;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,10 +11,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="bank_account", schema = "public")
-public class BankAccount {
+public class BankAccount  implements Serializable {
+
+  private static final long serialVersionUID = 1L;
 
   @Id
-  @Column(name = "bank_account_id", nullable = false)
+  @Column(name = "bank_account_id")
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long bankAccountId;
 
@@ -26,10 +28,10 @@ public class BankAccount {
   private String accountHolder;
 
   @Column(name = "bank_id")
-  private UUID bankId;
+  private Long bankId;
 
   @Column(name = "ifsc")
-  private String IFSC;
+  private String ifsc;
 
 
   public Long getBankAccountId() {
@@ -56,20 +58,19 @@ public class BankAccount {
     this.accountHolder = accountHolder;
   }
 
-  public UUID getBankId() {
+  public Long getBankId() {
     return bankId;
   }
 
-  public void setBankId(UUID bankId) {
+  public void setBankId(Long bankId) {
     this.bankId = bankId;
   }
 
-  public String getIFSC() {
-    return IFSC;
+  public String getIfsc() {
+    return ifsc;
   }
 
-  public void setIFSC(String IFSC) {
-    this.IFSC = IFSC;
+  public void setIfsc(String ifsc) {
+    this.ifsc = ifsc;
   }
-
 }
